@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import session from 'express-session';
+
 
 import path from "path";
 
@@ -19,11 +21,21 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 app.use(
+  session({
+    secret: "super",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    },
+  })
+);
+
+app.use(
   cors({
-    origin: [
-      "http://localhost:5173",      // untuk development lokal
-      "https://nigachat.vercel.app" // untuk production
-    ],
+    origin: "https://nigachat.vercel.app",
     credentials: true,
   })
 );
