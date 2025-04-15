@@ -18,6 +18,12 @@ dotenv.config();
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
+app.use(
+  cors({
+    origin: "https://nigachat.vercel.app",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -33,12 +39,6 @@ app.use(
   })
 );
 
-app.use(
-  cors({
-    origin: "https://nigachat.vercel.app",
-    credentials: true,
-  })
-);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
