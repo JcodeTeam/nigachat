@@ -20,7 +20,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://nigachat.vercel.app",
+    origin: [
+      "http://localhost:5173",      // untuk development lokal
+      "https://nigachat.vercel.app" // untuk production
+    ],
     credentials: true,
   })
 );
